@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Hasan Abbani | Writing</title>
+    <link>/writing</link>
+    <description>Upcoming essays on science, philosophy, learning, and growth.</description>
+    <item>
+      <title>The Science of Existence</title>
+      <link>/writing/the-science-of-existence</link>
+      <description>An upcoming essay on science and existence.</description>
+    </item>
+    <item>
+      <title>Mentory</title>
+      <link>/writing/mentory</link>
+      <description>An upcoming reflection on mentorship, memory, and growth.</description>
+    </item>
+  </channel>
+</rss>
