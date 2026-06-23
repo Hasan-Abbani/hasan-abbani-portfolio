@@ -9,7 +9,7 @@ export default function About() {
     <section id="about" className="page-section about-section">
       <div className="section-label"><span>01</span><p>Profile</p></div>
       <div className="about-layout">
-        <div><p className="display-copy">Curious by nature.<br />Analytical by training.<br /><em>Practical by choice.</em></p></div>
+        <div><p className="display-copy"><em>Practically curious.</em></p></div>
         <div className="about-body">
           <p>I’m an MSc Computational Science student on the Data Analytics track at the American University of Beirut. My work sits where data, machine learning, and scientific thinking meet.</p>
           <p>With a foundation in physics and a minor in computer science, I enjoy turning difficult questions into measurable problems, then building the tools to answer them.</p>

@@ -5,11 +5,10 @@ export default function Home() {
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero-grid">
         <div className="hero-copy">
-          <p className="eyebrow"><span /> Data Analytics · Artificial Intelligence</p>
+          <p className="eyebrow"><span /> Data Analytics · Artificial Intelligence · Writer</p>
           <h1 id="hero-title">Hasan<br /><em>Abbani</em></h1>
           <p className="hero-lede">
-            I turn complex data into clear decisions and intelligent systems, grounded in physics,
-            shaped by research, and built with code.
+            Knowledge enthusiast, interested in everything data, and a keen interest in AI, physics, and understanding humans. With a hobby of approaching problems from different perspectives.
           </p>
           <div className="hero-actions">
             <a className="button primary" href="#projects">Explore my work <span className="button-dot" aria-hidden="true" /></a>

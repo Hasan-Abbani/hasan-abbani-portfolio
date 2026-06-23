@@ -135,7 +135,7 @@
 
 .interest-card:hover .interest-title,
 .interest-card.active .interest-title {
-  color: var(--card-color);
+  color: #b0b0b0;
 }
 
 .interest-description {

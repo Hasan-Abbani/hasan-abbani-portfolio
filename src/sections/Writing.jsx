@@ -5,7 +5,7 @@ export default function Writing() {
   return (
     <section id="writing" className="page-section writing-section">
       <div className="section-label light"><span>06</span><p>Writing</p></div>
-      <div className="section-heading split"><h2>Notes on being<br /><em>curious.</em></h2><p>Two essays in progress, where scientific questions meet the human side of learning and growth.</p></div>
+      <div className="section-heading split"><h2><em>Writings and contemplations.</em></h2></div>
       <div className="writing-grid">
         {posts.map((post, index) => <Link to={`/writing/${post.slug}`} className="writing-card" key={post.slug}><div><span>0{index + 1}</span><span>Coming soon</span></div><h3>{post.title}</h3><p>{post.excerpt}</p><span className="writing-arrow">↗</span></Link>)}
       </div>

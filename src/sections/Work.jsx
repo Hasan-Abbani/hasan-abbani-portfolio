@@ -11,7 +11,7 @@ export default function Work() {
   return (
     <section id="projects" className="page-section projects-section">
       <div className="section-label"><span>03</span><p>Selected projects</p></div>
-      <div className="section-heading"><h2>Ideas made<br /><em>measurable.</em></h2></div>
+      <div className="section-heading"><h2><em>Tangibles.</em></h2></div>
       <div className="project-grid">
         {projects.map((project) => <article className="project-card" key={project.number}>
           <div className="project-top"><span>{project.number}</span><p>{project.type}</p>{project.href && <a href={project.href} target="_blank" rel="noreferrer" aria-label={`View ${project.title}`}>↗</a>}</div>
