@@ -13,7 +13,7 @@ const stars = Array.from({ length: STAR_COUNT }, (_, index) => {
   };
 });
 
-export default function SpaceJourney() {
+export default function SpaceJourney({ staticMode = false }) {
   const fieldRef = useRef(null);
   const planetRef = useRef(null);
   const moonRef = useRef(null);
@@ -32,7 +32,7 @@ export default function SpaceJourney() {
       const height = window.innerHeight;
       const maxScroll = Math.max(1, document.documentElement.scrollHeight - height);
       const progress = Math.min(1, scrollPosition / maxScroll);
-      const travel = reduceMotion ? 0 : scrollPosition * 0.72;
+      const travel = staticMode || reduceMotion ? 0 : scrollPosition * 0.72;
 
       starNodes.forEach((node, index) => {
         const star = stars[index];
@@ -93,6 +93,11 @@ export default function SpaceJourney() {
       render(renderedScroll);
     };
 
+    if (staticMode) {
+      render(0);
+      return;
+    }
+
     render(renderedScroll);
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", handleResize);
@@ -101,7 +106,7 @@ export default function SpaceJourney() {
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [staticMode]);
 
   return (
     <>

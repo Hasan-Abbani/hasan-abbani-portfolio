@@ -22,6 +22,7 @@ const sections = ["about", "experience", "projects", "education", "interests", "
 export default function App() {
   const [activeSection, setActiveSection] = useState("");
   const location = useLocation();
+  const isBlogRoute = location.pathname.startsWith("/writing/") && location.pathname !== "/writing";
 
   useEffect(() => {
     if (location.pathname === "/" && location.hash) {
@@ -83,7 +84,7 @@ export default function App() {
         <div className="shooting-star shooting-star-one" />
         <div className="shooting-star shooting-star-two" />
       </div>
-      <SpaceJourney />
+      <SpaceJourney staticMode={isBlogRoute} />
       <Navbar activeSection={activeSection} />
       <main id="main-content">
         <Suspense fallback={<div className="route-loading">Loading…</div>}>
