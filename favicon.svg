@@ -1,23 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
   <title id="title">Hasan Abbani monogram</title>
-  <desc id="desc">An interlocking HA monogram in teal and gold on a dark rounded square.</desc>
+  <desc id="desc">A minimalistic HA monogram in teal on a dark background.</desc>
   <defs>
-    <linearGradient id="bg" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#172238"/>
-      <stop offset="1" stop-color="#080d17"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0f1219"/>
+      <stop offset="1" stop-color="#060913"/>
     </linearGradient>
-    <linearGradient id="mark" x1="16" y1="15" x2="49" y2="50" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#5eead4"/>
-      <stop offset="0.58" stop-color="#2dd4bf"/>
-      <stop offset="1" stop-color="#0d9488"/>
-    </linearGradient>
-    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="1.4" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
   </defs>
-  <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#bg)"/>
-  <rect x="2.75" y="2.75" width="58.5" height="58.5" rx="14.25" fill="none" stroke="#2dd4bf" stroke-opacity=".22" stroke-width="1.5"/>
-  <path d="M16 16v32M16 32h20M36 16v32" fill="none" stroke="url(#mark)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M34 48 45 16l11 32M38 37h14" fill="none" stroke="#f4c752" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  <!-- Background -->
+  <rect width="64" height="64" fill="url(#bg)"/>
+  
+  <!-- Subtle accent border -->
+  <rect x="1" y="1" width="62" height="62" fill="none" stroke="#2dd4bf" stroke-width="1" opacity="0.2"/>
+  
+  <!-- HA monogram text -->
+  <text x="32" y="42" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="32" font-weight="600" text-anchor="middle" fill="#2dd4bf" letter-spacing="-1">HA</text>
 </svg>
