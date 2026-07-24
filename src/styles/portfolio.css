@@ -202,3 +202,64 @@ body .blog-index{color:#EAF6FF}body .blog-index-subtitle{color:#91ADC0}body .blo
   .writing-card h3{font-size:clamp(1.8rem,10vw,3rem);margin-top:48px}
   .social-links{flex-wrap:wrap;gap:16px 22px}
 }
+
+/* Keep navigation available as a floating menu at every screen size. */
+.menu-button{
+  display:flex;
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:110;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:52px;
+  height:52px;
+  min-width:52px;
+  min-height:52px;
+  padding:10px;
+  border:1px solid rgba(98,177,228,.65);
+  border-radius:50%;
+  background:rgba(3,9,18,.92);
+  color:#EAF6FF;
+  box-shadow:0 8px 24px rgba(0,0,0,.35),0 0 0 4px rgba(50,130,184,.12);
+  backdrop-filter:blur(12px);
+}
+.menu-button:hover{border-color:#BBE1FA;background:#0F4C75}
+.menu-button span{margin:0;width:24px;height:2px;background:currentColor}
+.menu-button span+span{margin-top:5px}
+
+@media(min-width:901px){
+  .nav-menu{
+    position:fixed;
+    right:20px;
+    bottom:84px;
+    z-index:100;
+    display:none;
+    flex-direction:column;
+    align-items:stretch;
+    gap:4px;
+    width:min(320px,calc(100vw - 40px));
+    max-height:calc(100svh - 120px);
+    overflow-y:auto;
+    padding:22px;
+    border:1px solid rgba(187,225,250,.2);
+    border-radius:16px;
+    background:rgba(3,9,18,.97);
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+    backdrop-filter:blur(18px);
+  }
+  .nav-menu.is-open{display:flex}
+  .nav-menu>a,.nav-writing>a{display:flex;align-items:center;min-height:44px;width:100%;font-size:.78rem}
+  .nav-writing{min-height:44px;align-items:center}
+  .nav-writing>a{width:auto;flex:1}
+  .writing-toggle{width:40px;height:40px;margin-left:auto}
+  .writing-dropdown{position:static;width:100%;margin:2px 0 8px;padding:12px 0 0;border-top:1px solid var(--line);box-shadow:none}
+  .writing-dropdown>a{display:flex;min-height:42px;padding:10px 0}
+  .nav-resume{justify-content:center;margin-top:12px;min-height:46px;width:100%;padding:12px 14px}
+}
+
+@media(max-width:480px){
+  .menu-button{right:14px;bottom:14px;width:48px;height:48px;min-width:48px;min-height:48px}
+  .nav-menu{padding-bottom:28px}
+}
