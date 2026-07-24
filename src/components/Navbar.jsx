@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { posts } from "../posts";
 
@@ -17,25 +17,6 @@ export default function Navbar({ activeSection }) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const closeOnEscape = (event) => {
-      if (event.key === "Escape") {
-        setOpen(false);
-        setWritingOpen(false);
-      }
-    };
-
-    document.addEventListener("keydown", closeOnEscape);
-    return () => document.removeEventListener("keydown", closeOnEscape);
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
-
   const goTo = (event, id) => {
     setOpen(false);
     if (location.pathname !== "/") {
@@ -50,10 +31,10 @@ export default function Navbar({ activeSection }) {
         <Link to="/" className="wordmark" aria-label="Hasan Abbani home">
           <span>HA</span><i aria-hidden="true" />
         </Link>
-        <button className={`menu-button ${open ? "is-open" : ""}`} onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="primary-navigation" aria-label={open ? "Close navigation" : "Open navigation"}>
-          <span /><span /><span />
+        <button className="menu-button" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Toggle navigation">
+          <span /><span />
         </button>
-        <div className={`nav-menu ${open ? "is-open" : ""}`} id="primary-navigation">
+        <div className={`nav-menu ${open ? "is-open" : ""}`}>
           {links.map(([id, label]) => id === "writing" ? (
             <div className={`nav-writing ${writingOpen ? "is-open" : ""}`} key={id}>
               <a href="#writing" className={activeSection === id ? "active" : ""} onClick={(e) => goTo(e, id)}>{label}</a>
@@ -78,7 +59,6 @@ export default function Navbar({ activeSection }) {
             <span>Download resume</span>
           </a>
         </div>
-        {open && <button className="nav-backdrop" aria-label="Close navigation" onClick={() => setOpen(false)} />}
       </nav>
     </header>
   );
