@@ -306,9 +306,3 @@ body .blog-index{color:#EAF6FF}body .blog-index-subtitle{color:#91ADC0}body .blo
 
 html,
 body { overflow-x: clip; }
-
-.space-nebula { filter: blur(32px); }
-
-@media (max-width: 768px) {
-  .space-nebula { filter: blur(22px); }
-}

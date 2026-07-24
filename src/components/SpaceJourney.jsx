@@ -24,25 +24,17 @@ export default function SpaceJourney({ staticMode = false }) {
     const starNodes = field ? Array.from(field.children) : [];
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let frame = 0;
-    let viewportWidth = window.innerWidth;
-    let viewportHeight = window.innerHeight;
-    let maxScroll = Math.max(1, document.documentElement.scrollHeight - viewportHeight);
     let targetScroll = window.scrollY;
     let renderedScroll = targetScroll;
 
     const render = (scrollPosition) => {
-      const width = viewportWidth;
-      const height = viewportHeight;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - height);
       const progress = Math.min(1, scrollPosition / maxScroll);
       const travel = staticMode || reduceMotion ? 0 : scrollPosition * 0.72;
-      const visibleStarCount = width < 768 ? 55 : STAR_COUNT;
 
       starNodes.forEach((node, index) => {
-        if (index >= visibleStarCount) {
-          node.style.display = "none";
-          return;
-        }
-        node.style.display = "block";
         const star = stars[index];
         const depth = ((star.depth - travel) % 1200 + 1200) % 1200 + 28;
         const projection = 235 / depth;
@@ -75,7 +67,7 @@ export default function SpaceJourney({ staticMode = false }) {
 
     const tick = () => {
       const distance = targetScroll - renderedScroll;
-      renderedScroll += distance * 0.3;
+      renderedScroll += distance * 0.13;
       if (Math.abs(distance) < 0.2) renderedScroll = targetScroll;
       render(renderedScroll);
       if (renderedScroll !== targetScroll) {
@@ -96,9 +88,6 @@ export default function SpaceJourney({ staticMode = false }) {
     };
 
     const handleResize = () => {
-      viewportWidth = window.innerWidth;
-      viewportHeight = window.innerHeight;
-      maxScroll = Math.max(1, document.documentElement.scrollHeight - viewportHeight);
       targetScroll = window.scrollY;
       renderedScroll = targetScroll;
       render(renderedScroll);
