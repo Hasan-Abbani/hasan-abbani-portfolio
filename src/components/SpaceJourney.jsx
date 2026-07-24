@@ -1,6 +1,10 @@
 import { useEffect, useRef } from "react";
 
 const STAR_COUNT = 80;
+const SCROLL_VELOCITY_DECAY_MS = 90;
+const POSITION_EPSILON = 0.01;
+const VELOCITY_EPSILON = 0.001;
+
 const stars = Array.from({ length: STAR_COUNT }, (_, index) => {
   const angle = ((index * 137.508) % 360) * (Math.PI / 180);
   const radius = 0.12 + (((index * 47) % 97) / 97) * 1.28;
@@ -31,6 +35,8 @@ export default function SpaceJourney({ staticMode = false }) {
     let devicePixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
     let targetScroll = window.scrollY;
     let renderedScroll = targetScroll;
+    let pendingScrollDelta = 0;
+    let scrollVelocity = 0;
 
     const resizeCanvas = () => {
       viewportWidth = window.innerWidth;
@@ -93,14 +99,48 @@ export default function SpaceJourney({ staticMode = false }) {
     };
 
     const tick = (timestamp) => {
-      const deltaTime = lastFrameTime ? Math.min(20, timestamp - lastFrameTime) : 16.67;
+      const deltaTime = lastFrameTime ? timestamp - lastFrameTime : 16.67;
       lastFrameTime = timestamp;
+
+      if (pendingScrollDelta !== 0) {
+        if (
+          scrollVelocity !== 0 &&
+          Math.sign(pendingScrollDelta) !== Math.sign(scrollVelocity)
+        ) {
+          scrollVelocity = 0;
+        }
+        scrollVelocity += pendingScrollDelta / SCROLL_VELOCITY_DECAY_MS;
+        pendingScrollDelta = 0;
+      }
+
+      const decay = Math.exp(-deltaTime / SCROLL_VELOCITY_DECAY_MS);
+      const frameTravel =
+        scrollVelocity * SCROLL_VELOCITY_DECAY_MS * (1 - decay);
       const distance = targetScroll - renderedScroll;
-      const smoothing = 1 - Math.exp(-deltaTime / 40);
-      renderedScroll += distance * smoothing;
-      if (Math.abs(distance) < 0.2) renderedScroll = targetScroll;
+
+      if (
+        distance === 0 ||
+        Math.sign(frameTravel) !== Math.sign(distance) ||
+        Math.abs(frameTravel) >= Math.abs(distance)
+      ) {
+        renderedScroll = targetScroll;
+        scrollVelocity = 0;
+      } else {
+        renderedScroll += frameTravel;
+        scrollVelocity *= decay;
+      }
+
+      const remainingDistance = targetScroll - renderedScroll;
+      if (
+        Math.abs(remainingDistance) < POSITION_EPSILON &&
+        Math.abs(scrollVelocity) < VELOCITY_EPSILON
+      ) {
+        renderedScroll = targetScroll;
+        scrollVelocity = 0;
+      }
+
       render(renderedScroll);
-      if (renderedScroll !== targetScroll) {
+      if (renderedScroll !== targetScroll || pendingScrollDelta !== 0) {
         frame = requestAnimationFrame(tick);
       } else {
         frame = 0;
@@ -109,8 +149,12 @@ export default function SpaceJourney({ staticMode = false }) {
     };
 
     const schedule = () => {
-      targetScroll = window.scrollY;
+      const nextScroll = window.scrollY;
+      pendingScrollDelta += nextScroll - targetScroll;
+      targetScroll = nextScroll;
       if (reduceMotion) {
+        pendingScrollDelta = 0;
+        scrollVelocity = 0;
         renderedScroll = targetScroll;
         render(renderedScroll);
       } else if (!frame) {
@@ -122,6 +166,8 @@ export default function SpaceJourney({ staticMode = false }) {
       resizeCanvas();
       targetScroll = window.scrollY;
       renderedScroll = targetScroll;
+      pendingScrollDelta = 0;
+      scrollVelocity = 0;
       render(renderedScroll);
     };
 
