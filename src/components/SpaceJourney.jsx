@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-const STAR_COUNT = 110;
+const STAR_COUNT = 80;
 const stars = Array.from({ length: STAR_COUNT }, (_, index) => {
   const angle = ((index * 137.508) % 360) * (Math.PI / 180);
   const radius = 0.12 + (((index * 47) % 97) / 97) * 1.28;
@@ -15,8 +15,6 @@ const stars = Array.from({ length: STAR_COUNT }, (_, index) => {
 
 export default function SpaceJourney({ staticMode = false }) {
   const canvasRef = useRef(null);
-  const planetRef = useRef(null);
-  const moonRef = useRef(null);
   const nebulaRef = useRef(null);
 
   useEffect(() => {
@@ -47,8 +45,8 @@ export default function SpaceJourney({ staticMode = false }) {
     };
 
     const renderStars = (scrollPosition) => {
-      const travel = staticMode || reduceMotion ? 0 : scrollPosition * 0.72;
-      const visibleStarCount = viewportWidth < 768 ? 70 : STAR_COUNT;
+      const travel = staticMode || reduceMotion ? 0 : scrollPosition * 0.28;
+      const visibleStarCount = viewportWidth < 768 ? 50 : STAR_COUNT;
 
       context.clearRect(0, 0, viewportWidth, viewportHeight);
       context.save();
@@ -88,18 +86,6 @@ export default function SpaceJourney({ staticMode = false }) {
       const progress = Math.min(1, scrollPosition / maxScroll);
       renderStars(scrollPosition);
 
-      if (planetRef.current) {
-        const x = 118 - progress * 165;
-        const y = 68 - Math.sin(progress * Math.PI) * 42;
-        const scale = 0.55 + progress * 1.05;
-        planetRef.current.style.transform = `translate3d(${x}vw, ${y}vh, 0) scale(${scale})`;
-        planetRef.current.style.opacity = Math.sin(progress * Math.PI) * 0.88;
-      }
-      if (moonRef.current) {
-        const phase = Math.max(0, Math.min(1, (progress - 0.36) / 0.54));
-        moonRef.current.style.transform = `translate3d(${8 + phase * 74}vw, ${86 - phase * 72}vh, 0) scale(${0.4 + phase * 0.75})`;
-        moonRef.current.style.opacity = Math.sin(phase * Math.PI) * 0.72;
-      }
       if (nebulaRef.current) {
         nebulaRef.current.style.transform = `translate3d(${35 - progress * 58}vw, ${20 + progress * 20}vh, 0) rotate(${progress * 24}deg) scale(${0.8 + progress * 0.5})`;
         nebulaRef.current.style.opacity = 0.12 + Math.sin(progress * Math.PI) * 0.2;
@@ -107,10 +93,10 @@ export default function SpaceJourney({ staticMode = false }) {
     };
 
     const tick = (timestamp) => {
-      const deltaTime = lastFrameTime ? Math.min(50, timestamp - lastFrameTime) : 16.67;
+      const deltaTime = lastFrameTime ? Math.min(20, timestamp - lastFrameTime) : 16.67;
       lastFrameTime = timestamp;
       const distance = targetScroll - renderedScroll;
-      const smoothing = 1 - Math.exp(-deltaTime / 70);
+      const smoothing = 1 - Math.exp(-deltaTime / 40);
       renderedScroll += distance * smoothing;
       if (Math.abs(distance) < 0.2) renderedScroll = targetScroll;
       render(renderedScroll);
@@ -163,8 +149,6 @@ export default function SpaceJourney({ staticMode = false }) {
           <canvas ref={canvasRef} aria-hidden="true" />
         </div>
         <div className="space-nebula" ref={nebulaRef} />
-        <div className="space-planet" ref={planetRef}><span /></div>
-        <div className="space-moon" ref={moonRef} />
         <div className="rocket-window" />
       </div>
     </>
