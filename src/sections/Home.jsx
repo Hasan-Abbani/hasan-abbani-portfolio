@@ -5,7 +5,7 @@ export default function Home() {
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero-grid">
         <div className="hero-copy">
-          <p className="eyebrow"><span /> Data Analytics · Artificial Intelligence · Writer</p>
+          <p className="eyebrow"><span /> Data Scientist &middot; Researcher &middot; Writer</p>
           <h1 id="hero-title">Hasan<br /><em>Abbani</em></h1>
           <p className="hero-lede">
             Knowledge enthusiast, interested in everything data, and a keen interest in AI, physics, and understanding humans. With a hobby of approaching problems from different perspectives.
