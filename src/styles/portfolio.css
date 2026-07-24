@@ -157,3 +157,152 @@ body .blog-index{color:#EAF6FF}body .blog-index-subtitle{color:#91ADC0}body .blo
 @media(max-width:1000px){.interest-boxes{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:768px){.personal-section{grid-template-columns:1fr;margin-top:80px;padding-top:55px}.about-portrait{position:relative;top:auto;max-width:430px}.interest-boxes{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:480px){.interest-boxes{grid-template-columns:1fr 1fr;gap:8px}.interest-box{min-height:165px;padding:14px}.interest-box h3{font-size:.82rem}.interest-box p{font-size:.68rem}.nav-resume{display:inline-flex}}
+
+/* Responsive polish for the active site shell */
+@media (max-width: 1024px) {
+  :root { --nav-height: 78px; }
+
+  .menu-button {
+    display: block;
+    position: relative;
+    z-index: 3;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 8px;
+  }
+
+  .menu-button span {
+    width: 24px;
+    height: 2px;
+    margin: 6px auto;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+
+  .menu-button[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
+  .menu-button[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
+
+  .nav-menu {
+    position: fixed;
+    z-index: 2;
+    top: var(--nav-height);
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-height: calc(100dvh - var(--nav-height));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 20px max(24px, 5vw) 28px;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    background: rgba(3, 9, 18, .98);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, .28);
+  }
+
+  .nav-menu.is-open { display: flex; }
+  .nav-menu > a,
+  .nav-writing > a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    width: 100%;
+    font-size: .82rem;
+  }
+
+  .nav-writing {
+    width: 100%;
+    flex-wrap: wrap;
+    min-height: 44px;
+  }
+
+  .nav-writing > a { width: auto; flex: 1; }
+  .writing-toggle { width: 44px; height: 44px; margin: 0; }
+  .writing-dropdown {
+    position: static;
+    flex-basis: 100%;
+    width: 100%;
+    min-width: 0;
+    max-height: none;
+    margin: 4px 0 8px;
+    padding: 10px;
+    display: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .nav-writing.is-open .writing-dropdown { display: block; }
+  .nav-writing:focus-within .writing-dropdown { display: none; }
+  .nav-writing.is-open:focus-within .writing-dropdown { display: block; }
+  .writing-dropdown > a { min-height: 44px; display: flex; align-items: center; }
+
+  .nav-resume {
+    justify-content: center;
+    min-height: 46px;
+    margin-top: 8px;
+  }
+
+  .nav-backdrop {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    inset: var(--nav-height) 0 0;
+    width: 100%;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: rgba(0, 0, 0, .48);
+  }
+
+  body.menu-is-open { overflow: hidden; }
+  .hero-grid,
+  .section-heading.split,
+  .about-layout,
+  .education-layout,
+  .contact-layout { min-width: 0; }
+  img { max-width: 100%; height: auto; }
+  .email-link { min-width: 0; overflow-wrap: anywhere; }
+}
+
+@media (max-width: 768px) {
+  .nav-shell { padding-inline: 18px; }
+  .hero { padding-inline: 20px; }
+  .page-section,
+  .experience-section,
+  .projects-section,
+  .writing-section { padding-inline: 20px; }
+  .project-grid,
+  .writing-grid { grid-template-columns: 1fr; }
+  .project-card { min-height: 360px; }
+  .writing-card { min-height: 300px; }
+  .section-heading h2,
+  .contact-section h2 { font-size: clamp(2.6rem, 12vw, 5rem); }
+}
+
+@media (max-width: 480px) {
+  :root { --nav-height: 70px; }
+  .site-nav { height: var(--nav-height); }
+  .nav-menu { top: var(--nav-height); max-height: calc(100dvh - var(--nav-height)); padding-inline: 16px; }
+  .nav-backdrop { inset: var(--nav-height) 0 0; }
+  .hero { min-height: auto; padding-top: 112px; }
+  .hero h1 { font-size: clamp(3.4rem, 21vw, 6rem); }
+  .hero-lede { font-size: 1rem; }
+  .page-section,
+  .experience-section,
+  .projects-section,
+  .writing-section { padding-inline: 16px; }
+  .project-card { min-height: 330px; padding: 22px; }
+  .writing-card { min-height: 280px; padding: 22px; }
+  .writing-card h3 { margin-top: 52px; }
+  .section-label { gap: 10px; margin-bottom: 34px; }
+  .section-heading h2,
+  .contact-section h2 { font-size: clamp(2.35rem, 13vw, 4rem); }
+  .social-links { flex-wrap: wrap; gap: 16px; }
+}
+
+html,
+body { overflow-x: clip; }
