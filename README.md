@@ -1,6 +1,6 @@
 # Hasan Abbani Portfolio
 
-Personal portfolio and writing site for Hasan Abbani, built with React and Vite.
+My personal portfolio and writing site, built with React and Vite.
 
 ## Development
 
