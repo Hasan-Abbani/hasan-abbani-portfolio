@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -21,6 +21,7 @@ const NotFound = lazy(() => import("./components/NotFound"));
 const sections = ["about", "experience", "projects", "education", "interests", "writing", "contact"];
 
 export default function App() {
+  const isPageReload = useRef(window.performance.getEntriesByType("navigation")[0]?.type === "reload");
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState("");
   const location = useLocation();
@@ -28,6 +29,28 @@ export default function App() {
 
   useEffect(() => {
     if (isLoading) return;
+    if (isPageReload.current) {
+      isPageReload.current = false;
+      const previousRestoration = window.history.scrollRestoration;
+      window.history.scrollRestoration = "manual";
+      window.requestAnimationFrame(() => {
+        window.scrollTo(0, 0);
+        window.history.scrollRestoration = previousRestoration;
+      });
+      return;
+    }
+    if (location.pathname === "/" && location.state?.restorePortfolioScroll) {
+      const savedPosition = Number(window.sessionStorage.getItem("portfolio-scroll-position"));
+      if (Number.isFinite(savedPosition)) {
+        window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+          const previousBehavior = document.documentElement.style.scrollBehavior;
+          document.documentElement.style.scrollBehavior = "auto";
+          window.scrollTo(0, savedPosition);
+          document.documentElement.style.scrollBehavior = previousBehavior;
+        }));
+      }
+      return;
+    }
     if (location.pathname === "/" && location.hash) {
       setTimeout(() => document.querySelector(location.hash)?.scrollIntoView({ behavior: "smooth" }), 80);
     }

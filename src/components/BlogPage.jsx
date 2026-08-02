@@ -84,6 +84,13 @@ export default function BlogPage() {
   const location = useLocation();
   const scrollMilestones = useRef({ 25: false, 50: false, 75: false, 100: false });
 
+  useEffect(() => {
+    const previousBehavior = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    document.documentElement.style.scrollBehavior = previousBehavior;
+  }, [slug]);
+
   const readingTimeMinutes = useMemo(() => {
     if (!post?.content) return 0;
     const text = post.content.replace(/<[^>]+>/g, " ");
@@ -240,7 +247,7 @@ export default function BlogPage() {
           <p>The blog you are looking for doesn't exist.</p>
           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
             <Link to="/writing" className="btn btn-primary">Browse Writing</Link>
-            <Link to="/" className="btn btn-secondary">Back to Portfolio</Link>
+            <Link to="/" state={{ restorePortfolioScroll: true }} className="btn btn-secondary">Back to Portfolio</Link>
           </div>
         </div>
       </div>
@@ -277,7 +284,7 @@ export default function BlogPage() {
           <div ref={contentRef} className="blog-content" dangerouslySetInnerHTML={{ __html: post.content }} />
 
           <footer className="blog-footer">
-            <Link to="/" className="btn btn-secondary">Back to Portfolio</Link>
+            <Link to="/" state={{ restorePortfolioScroll: true }} className="btn btn-secondary">Back to Portfolio</Link>
           </footer>
         </main>
 

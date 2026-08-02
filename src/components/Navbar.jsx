@@ -63,7 +63,7 @@ export default function Navbar({ activeSection }) {
               <div className="writing-dropdown">
                 <p>Writing</p>
                 {posts.map((post) => (
-                  <Link key={post.slug} to={`/writing/${post.slug}`} onClick={() => { setOpen(false); setWritingOpen(false); }}>
+                  <Link key={post.slug} to={`/writing/${post.slug}`} onClick={() => { if (location.pathname === "/") window.sessionStorage.setItem("portfolio-scroll-position", String(window.scrollY)); setOpen(false); setWritingOpen(false); }}>
                     <span>{post.title}</span><b>↗</b>
                   </Link>
                 ))}
