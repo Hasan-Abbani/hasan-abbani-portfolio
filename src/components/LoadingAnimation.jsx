@@ -1,64 +1,27 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import "../styles/loading-animation.css";
 
-export default function LoadingAnimation() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isHiding, setIsHiding] = useState(false);
+export default function LoadingAnimation({ onComplete }) {
+  const [isLeaving, setIsLeaving] = useState(false);
 
   useEffect(() => {
-    // Minimum loading time for smooth animation
-    const minLoadTime = 1500;
-    const startTime = Date.now();
+    const leaveTimer = window.setTimeout(() => setIsLeaving(true), 950);
+    const completeTimer = window.setTimeout(onComplete, 1450);
 
-    const handleLoad = () => {
-      const elapsedTime = Date.now() - startTime;
-      const remainingTime = Math.max(0, minLoadTime - elapsedTime);
-
-      setTimeout(() => {
-        setIsHiding(true);
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 600); // Match the fade-out animation duration
-      }, remainingTime);
+    return () => {
+      window.clearTimeout(leaveTimer);
+      window.clearTimeout(completeTimer);
     };
-
-    if (document.readyState === 'complete') {
-      handleLoad();
-    } else {
-      window.addEventListener('load', handleLoad);
-      return () => window.removeEventListener('load', handleLoad);
-    }
-  }, []);
-
-  if (!isLoading) return null;
+  }, [onComplete]);
 
   return (
-    <div className={`loading-screen ${isHiding ? 'hiding' : ''}`}>
-      <div className="loading-content">
-        <div className="loading-logo">
-          <span className="loading-m loading-m-1">M</span>
-          <span className="loading-m loading-m-2">M</span>
-          <span className="loading-slash">/</span>
-        </div>
-        <div className="loading-bar">
-          <div className="loading-progress"></div>
-        </div>
-        <p className="loading-text">Loading Portfolio...</p>
+    <div className={`loading-screen ${isLeaving ? "is-leaving" : ""}`} role="status" aria-label="Loading Hasan Abbani's portfolio">
+      <div className="loading-mark" aria-hidden="true">
+        <span>HA</span>
+        <i />
       </div>
-      <div className="loading-particles">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="loading-particle"
-            style={{
-              '--x': `${Math.random() * 100}%`,
-              '--y': `${Math.random() * 100}%`,
-              '--delay': `${Math.random() * 2}s`,
-              '--duration': `${2 + Math.random() * 2}s`
-            }}
-          />
-        ))}
-      </div>
+      <p>Hasan Abbani</p>
+      <div className="loading-track" aria-hidden="true"><span /></div>
     </div>
   );
 }

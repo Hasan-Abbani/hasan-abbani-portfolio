@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import SpaceJourney from "./components/SpaceJourney";
+import LoadingAnimation from "./components/LoadingAnimation";
 import Home from "./sections/Home";
 import About from "./sections/About";
 import Experience from "./sections/Experience";
@@ -20,17 +21,20 @@ const NotFound = lazy(() => import("./components/NotFound"));
 const sections = ["about", "experience", "projects", "education", "interests", "writing", "contact"];
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState("");
   const location = useLocation();
   const isBlogRoute = location.pathname.startsWith("/writing/") && location.pathname !== "/writing";
 
   useEffect(() => {
+    if (isLoading) return;
     if (location.pathname === "/" && location.hash) {
       setTimeout(() => document.querySelector(location.hash)?.scrollIntoView({ behavior: "smooth" }), 80);
     }
-  }, [location]);
+  }, [isLoading, location]);
 
   useEffect(() => {
+    if (isLoading) return;
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((entry) => entry.isIntersecting && setActiveSection(entry.target.id)),
       { rootMargin: "-42% 0px -48%" }
@@ -40,7 +44,7 @@ export default function App() {
       if (element) observer.observe(element);
     });
     return () => observer.disconnect();
-  }, [location.pathname]);
+  }, [isLoading, location.pathname]);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -58,6 +62,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (isLoading) return;
     if (location.pathname !== "/" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const elements = document.querySelectorAll(
       ".page-section > .section-label, .page-section > .section-heading, .about-layout, .capability-grid, .experience-list, .project-grid, .education-layout, .education-note, .personal-section, .writing-grid, .contact-layout"
@@ -74,7 +79,9 @@ export default function App() {
     );
     elements.forEach((element) => revealObserver.observe(element));
     return () => revealObserver.disconnect();
-  }, [location.pathname]);
+  }, [isLoading, location.pathname]);
+
+  if (isLoading) return <LoadingAnimation onComplete={() => setIsLoading(false)} />;
 
   return (
     <>
