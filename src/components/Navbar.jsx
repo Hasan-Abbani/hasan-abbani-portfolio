@@ -11,6 +11,11 @@ const links = [
   ["contact", "Contact"],
 ];
 
+const externalWritingLinks = {
+  "the-science-of-existence": "https://thescienceofexistence.wordpress.com/",
+  mentory: "https://mentoryblog.wordpress.com/",
+};
+
 export default function Navbar({ activeSection }) {
   const [open, setOpen] = useState(false);
   const [writingOpen, setWritingOpen] = useState(false);
@@ -62,11 +67,19 @@ export default function Navbar({ activeSection }) {
               </button>
               <div className="writing-dropdown">
                 <p>Writing</p>
-                {posts.map((post) => (
-                  <Link key={post.slug} to={`/writing/${post.slug}`} onClick={() => { if (location.pathname === "/") window.sessionStorage.setItem("portfolio-scroll-position", String(window.scrollY)); setOpen(false); setWritingOpen(false); }}>
-                    <span>{post.title}</span><b>↗</b>
-                  </Link>
-                ))}
+                {posts.map((post) => {
+                  const externalUrl = externalWritingLinks[post.slug];
+                  const WritingLink = externalUrl ? "a" : Link;
+                  const linkProps = externalUrl
+                    ? { href: externalUrl, target: "_blank", rel: "noreferrer" }
+                    : { to: `/writing/${post.slug}` };
+
+                  return (
+                    <WritingLink key={post.slug} {...linkProps} onClick={() => { if (location.pathname === "/") window.sessionStorage.setItem("portfolio-scroll-position", String(window.scrollY)); setOpen(false); setWritingOpen(false); }}>
+                      <span>{post.title}</span><b>↗</b>
+                    </WritingLink>
+                  );
+                })}
                 <Link to="/writing" className="all-writing" onClick={() => { setOpen(false); setWritingOpen(false); }}>View all writing →</Link>
               </div>
             </div>

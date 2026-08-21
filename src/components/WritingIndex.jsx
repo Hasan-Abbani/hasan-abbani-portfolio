@@ -107,29 +107,40 @@ export default function WritingIndex() {
       </header>
 
       <div className="blog-index-list" role="list">
-        {filtered.map((p) => (
-          <Link
-            key={p.slug}
-            to={`/writing/${p.slug}`}
-            className="blog-index-card"
-            role="listitem"
-            onClick={() => trackEvent({ action: 'blog_index_click', category: 'navigation', label: p.slug })}
-          >
-            <div className="blog-card-content">
-              <h2 className="blog-card-title">{highlight(p.title, query)}</h2>
-              <p className="blog-card-excerpt">{highlight(p.excerpt, query)}</p>
-              <div className="blog-card-meta">
-                <span className="blog-card-date">{new Date(p.date).toLocaleDateString()}</span>
-                <div className="blog-card-tags">
-                  {(p.tags || []).map((t) => (
-                    <span key={t} className="blog-card-tag">{t}</span>
-                  ))}
+        {filtered.map((p) => {
+          const externalUrl = {
+            "the-science-of-existence": "https://thescienceofexistence.wordpress.com/",
+            mentory: "https://mentoryblog.wordpress.com/",
+          }[p.slug];
+          const WritingLink = externalUrl ? "a" : Link;
+          const linkProps = externalUrl
+            ? { href: externalUrl, target: "_blank", rel: "noreferrer" }
+            : { to: `/writing/${p.slug}` };
+
+          return (
+            <WritingLink
+              key={p.slug}
+              {...linkProps}
+              className="blog-index-card"
+              role="listitem"
+              onClick={() => trackEvent({ action: 'blog_index_click', category: 'navigation', label: p.slug })}
+            >
+              <div className="blog-card-content">
+                <h2 className="blog-card-title">{highlight(p.title, query)}</h2>
+                <p className="blog-card-excerpt">{highlight(p.excerpt, query)}</p>
+                <div className="blog-card-meta">
+                  <span className="blog-card-date">{new Date(p.date).toLocaleDateString()}</span>
+                  <div className="blog-card-tags">
+                    {(p.tags || []).map((t) => (
+                      <span key={t} className="blog-card-tag">{t}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-            <span className="blog-card-arrow">→</span>
-          </Link>
-        ))}
+              <span className="blog-card-arrow">→</span>
+            </WritingLink>
+          );
+        })}
         {filtered.length === 0 && (
           <div className="blog-empty">No posts match your filters.</div>
         )}

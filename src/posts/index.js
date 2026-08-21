@@ -32,8 +32,6 @@ With the development of agriculture around 12,000 years ago, humans went from li
 
 As these settlements grew into larger communities, they turned into villages (in the modern sense) and some social structures required a leader which were typically local chieftains who usually helped distribute the harvests, and territory, and resolve any conflict between members of the community.
 
-Then came the changing point for conflicts, where it went from occurring out of need and survival to coming out of greed and discrimination (religion-racism-classes-gender).
-
-In progress..`,
+Coming soon.`,
   },
 ];
