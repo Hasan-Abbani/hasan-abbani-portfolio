@@ -26,7 +26,7 @@ export default function Writing() {
               key={post.slug}
               onClick={() => window.sessionStorage.setItem("portfolio-scroll-position", String(window.scrollY))}
             >
-              <div><span>0{index + 1}</span><span>Coming soon</span></div>
+              <div><span>0{index + 1}</span><span>{post.slug === "love" ? new Date(post.date).toLocaleDateString() : "Coming soon"}</span></div>
               <h3>{post.title}</h3>
               <p>{post.excerpt}</p>
               <span className="writing-arrow">↗</span>

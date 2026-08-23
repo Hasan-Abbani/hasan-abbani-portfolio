@@ -21,6 +21,11 @@ const escapeHtml = (s) => s
   .replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;');
 
+const renderInline = (s) => escapeHtml(s).replace(
+  /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,
+  '<a href="$2" target="_blank" rel="noreferrer">$1</a>'
+);
+
 const renderContent = (raw) => {
   if (!raw) return '';
   if (/<[a-z][\s\S]*>/i.test(raw)) return raw;
@@ -29,7 +34,7 @@ const renderContent = (raw) => {
   let listBuf = [];
   const flushList = () => {
     if (listBuf.length) {
-      html.push('<ul>' + listBuf.map(li => `<li>${escapeHtml(li)}</li>`).join('') + '</ul>');
+      html.push('<ul>' + listBuf.map(li => `<li>${renderInline(li)}</li>`).join('') + '</ul>');
       listBuf = [];
     }
   };
@@ -43,16 +48,16 @@ const renderContent = (raw) => {
     flushList();
     if (block.startsWith('> ')) {
       const inner = block.replace(/^>\s?/gm, '').trim();
-      html.push(`<blockquote><p>${escapeHtml(inner)}</p></blockquote>`);
+      html.push(`<blockquote><p>${renderInline(inner)}</p></blockquote>`);
       continue;
     }
     const wordCount = block.split(/\s+/).length;
     const endsLikeSentence = /[.!?…]"?$/.test(block);
     const isHeading = block.length <= 100 && wordCount <= 14 && !endsLikeSentence && !/\n/.test(block);
     if (isHeading) {
-      html.push(`<h2>${escapeHtml(block)}</h2>`);
+      html.push(`<h2>${renderInline(block)}</h2>`);
     } else {
-      const inner = block.split('\n').map(l => escapeHtml(l)).join('<br/>');
+      const inner = block.split('\n').map(l => renderInline(l)).join('<br/>');
       html.push(`<p>${inner}</p>`);
     }
   }
