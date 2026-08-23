@@ -1,7 +1,7 @@
 const capabilities = [
-  ["01", "Data & analytics", "Python, R, SQL, Power BI, exploratory analysis, KPI reporting and visualization."],
-  ["02", "Machine learning", "Scikit-learn, PyTorch, supervised and unsupervised learning, model selection and evaluation."],
-  ["03", "Intelligent systems", "Transformers, attention, generative AI concepts, reinforcement learning and optimization."],
+  ["01", "Data & analytics", "Python, R, SQL, Pandas, NumPy, Matplotlib, exploratory analysis, feature engineering, KPI reporting, and data visualization."],
+  ["02", "Machine learning", "Scikit-learn and PyTorch for regression, classification, clustering, neural networks, model selection, and evaluation."],
+  ["03", "Algorithms & systems", "Optimization, algorithmic graph theory, reinforcement learning, Monte Carlo methods, external data integration, and reproducible pipelines."],
 ];
 
 export default function About() {

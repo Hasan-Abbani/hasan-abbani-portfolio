@@ -7,8 +7,7 @@ export default function Home() {
         <div className="hero-copy">
           <p className="eyebrow"><span /> Data Scientist &middot; Researcher &middot; Writer</p>
           <h1 id="hero-title" className="interactive-name">
-            <span className="name-line name-first">Hasan</span>
-            <span className="name-line name-last">Abbani</span>
+            <span className="name-line name-first">Hi, I’m Hasan</span>
           </h1>
           <p className="hero-lede">
             I'm a knowledge enthusiast, interested in everything data, and a keen interest in algorithms, physics, and understanding humans. With a hobby of approaching problems from different perspectives.

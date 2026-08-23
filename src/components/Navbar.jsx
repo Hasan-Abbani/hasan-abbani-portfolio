@@ -53,7 +53,7 @@ export default function Navbar({ activeSection }) {
     <header className="site-nav">
       <nav className="nav-shell" aria-label="Main navigation">
         <Link to="/" className="wordmark" aria-label="Hasan Abbani home">
-          <span>HA</span><i aria-hidden="true" />
+          <span>Hasan Abbani</span><i aria-hidden="true" />
         </Link>
         <button ref={menuButtonRef} className="menu-button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="primary-navigation" aria-label={open ? "Close navigation" : "Open navigation"}>
           <span /><span />

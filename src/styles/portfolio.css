@@ -316,3 +316,74 @@ body .blog-index{color:#EAF6FF}body .blog-index-subtitle{color:#91ADC0}body .blo
 
 html,
 body { overflow-x: clip; }
+
+.hero h1 {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(2.6rem, 5.2vw, 5.2rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -.035em;
+}
+
+.hero h1 .name-line {
+  display: inline;
+}
+
+.hero h1 .name-last {
+  color: inherit;
+}
+
+/* Compact the home visual on phones so the portrait does not dominate the first screen. */
+@media (max-width: 620px) {
+  .hero {
+    min-height: auto;
+    padding-top: 104px;
+    padding-bottom: 28px;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.75rem, 8vw, 2.45rem);
+    line-height: 1.08;
+    letter-spacing: -.025em;
+  }
+
+  .hero-grid > .hero-visual {
+    width: min(42vw, 150px);
+    height: auto;
+    aspect-ratio: 4 / 5;
+    order: -1;
+    justify-self: start;
+    margin: 0 0 4px;
+  }
+
+  .hero-grid > .hero-visual .orbit { display: none; }
+  .hero-grid > .hero-visual .orbit-photo {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(187, 225, 250, .22);
+    background: rgba(187, 225, 250, .04);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .16);
+    padding: 3px;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .hero-grid > .hero-visual .orbit-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    border-radius: 5px;
+  }
+
+  .hero-visual > p { display: none; }
+  .hero-foot { margin-top: 28px; }
+}
+
+@media (max-width: 380px) {
+  .hero-grid > .hero-visual { width: 136px; }
+}
