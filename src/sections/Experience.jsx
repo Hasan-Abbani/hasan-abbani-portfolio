@@ -9,7 +9,7 @@ export default function Experience() {
   return (
     <section id="experience" className="page-section experience-section">
       <div className="section-label light"><span>02</span><p>Experience</p></div>
-      <div className="section-heading split"><h2>Learning by<br /><em>doing.</em></h2><p>From teaching data science to conducting materials research, each role has sharpened how I analyze, communicate, and lead.</p></div>
+      <div className="section-heading split"><h2>Experience.</h2></div>
       <div className="experience-list">
         {roles.map((item, index) => <article key={item.role}><span className="role-index">0{index + 1}</span><p className="role-period">{item.period}</p><div><h3>{item.role}</h3><h4>{item.org}</h4></div><p className="role-copy">{item.text}</p></article>)}
       </div>

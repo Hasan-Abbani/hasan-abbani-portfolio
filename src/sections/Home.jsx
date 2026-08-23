@@ -11,7 +11,7 @@ export default function Home() {
             <span className="name-line name-last">Abbani</span>
           </h1>
           <p className="hero-lede">
-            Knowledge enthusiast, interested in everything data, and a keen interest in AI, physics, and understanding humans. With a hobby of approaching problems from different perspectives.
+            I'm a knowledge enthusiast, interested in everything data, and a keen interest in algorithms, physics, and understanding humans. With a hobby of approaching problems from different perspectives.
           </p>
           <div className="hero-actions">
             <a className="button primary" href="#projects">Explore my work <span className="button-dot" aria-hidden="true" /></a>

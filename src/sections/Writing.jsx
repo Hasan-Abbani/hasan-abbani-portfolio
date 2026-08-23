@@ -10,7 +10,7 @@ export default function Writing() {
   return (
     <section id="writing" className="page-section writing-section">
       <div className="section-label light"><span>06</span><p>Writing</p></div>
-      <div className="section-heading split"><h2><em>Writings and contemplations.</em></h2></div>
+      <div className="section-heading split"><h2>Writings and contemplations.</h2></div>
       <div className="writing-grid">
         {posts.map((post, index) => {
           const externalUrl = externalLinks[post.slug];
