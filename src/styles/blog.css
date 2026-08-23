@@ -4,6 +4,7 @@
   margin: 0 auto;
   padding: 6rem 1.25rem 4rem;
   --content-max: 740px;
+  overflow-x: hidden;
 }
 
 .blog-header h1 {
@@ -63,6 +64,8 @@
   line-height: 1.85;
   color: var(--text-primary);
   max-width: var(--content-max);
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 .blog-content p {
@@ -70,6 +73,7 @@
   font-size: 1.2rem;
   color: var(--text-primary);
   margin-bottom: 1.5rem;
+  overflow-wrap: break-word;
 }
 
 .blog-content h2 {
@@ -101,6 +105,7 @@
 
 .blog-content ul li {
   margin-bottom: 0.5rem;
+  overflow-wrap: anywhere;
 }
 
 .blog-content img {
@@ -139,6 +144,8 @@
   text-decoration-color: rgba(45, 212, 191, 0.4);
   text-underline-offset: 3px;
   transition: text-decoration-color 0.15s ease;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .blog-content a:hover {
@@ -296,11 +303,14 @@
   align-items: start;
   max-width: var(--content-max);
   margin: 0 auto;
+  min-width: 0;
 }
 
 .blog-main {
   max-width: var(--content-max);
   margin: 0 auto;
+  min-width: 0;
+  width: 100%;
 }
 
 .blog-aside {
@@ -326,6 +336,17 @@
 }
 
 @media (max-width: 600px) {
+  .blog-page {
+    width: 100%;
+    padding-inline: 1rem;
+  }
+  .blog-header,
+  .blog-layout,
+  .blog-main,
+  .blog-main .blog-content {
+    max-width: 100%;
+    width: 100%;
+  }
   .blog-header h1 {
     font-size: 2rem;
   }
