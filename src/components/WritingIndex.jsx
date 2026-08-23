@@ -129,7 +129,7 @@ export default function WritingIndex() {
                 <h2 className="blog-card-title">{highlight(p.title, query)}</h2>
                 <p className="blog-card-excerpt">{highlight(p.excerpt, query)}</p>
                 <div className="blog-card-meta">
-                  <span className="blog-card-date">{new Date(p.date).toLocaleDateString()}</span>
+                  <span className="blog-card-date">{p.slug === "love" ? new Date(p.date).toLocaleDateString() : "Coming soon"}</span>
                   <div className="blog-card-tags">
                     {(p.tags || []).map((t) => (
                       <span key={t} className="blog-card-tag">{t}</span>
