@@ -50,7 +50,9 @@ Despite all these tools, modern dating and the concept of love have become more 
 Love is powerful. It leads us to make unimaginable things, it constitutes an essential part of our lives, and occupies a huge part of our thinking. You might change your long-term plan for someone, you might change your character, values, habits, and goals. At the mercy of love, you act out of your biology instead of reason, you return to behaviors rooted in your evolutionary past. If I want to summarize why we love, why it is powerful and important, in one sentence, it is this:
  To help us have and raise children. 
 
-So go love, and make some kiddos, and if you don’t want any, take the precautions.
+So go love, and make some kiddos (if you're straight), and if you don’t want any, take the precautions.
+
+Note: This one sentence is the evolutionary and biological reason we love, emotions and the psychology of love are the mechanisms through which we achieve it, genes do not care about how it happens, genes are passed on when the mechanism is successful. For same sex romantic love, this rule still applies, a trait can evolve for one function while the underlying mechanism is later expressed in contexts that do not serve that original evolutionary function.
 
 References
 
